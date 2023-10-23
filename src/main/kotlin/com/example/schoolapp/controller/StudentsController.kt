@@ -30,4 +30,8 @@ class StudentsController {
     fun updateName (@RequestBody students: Students):ResponseEntity<Students>{
         return ResponseEntity( studentsService.updateName(students), HttpStatus.OK)
     }
+    @DeleteMapping("/delete/{id}")
+    fun delete (@PathVariable("id") id: Long):Boolean?{
+        return studentsService.delete(id)
+    }
 }
