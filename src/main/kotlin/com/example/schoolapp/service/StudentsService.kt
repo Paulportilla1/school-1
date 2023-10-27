@@ -61,5 +61,7 @@ class StudentsService {
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
-
+    fun listById (id:Long?):Students?{
+        return studentsRepository.findById(id)
+    }
 }
