@@ -21,8 +21,8 @@ class SubjectService {
     }
     fun save(subject: Subject):Subject{
         try {
-            studentsRepository.findById(subject.Students_id)
-                ?: throw Exception("Id del cliente no encontrada")
+            studentsRepository.findById(subject.Studentsid)
+                ?: throw Exception("Id del Student no found")
             return subjectRepository.save(subject)
         }catch (ex : Exception){
             throw ResponseStatusException(
