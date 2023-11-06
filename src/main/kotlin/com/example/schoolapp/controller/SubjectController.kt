@@ -1,13 +1,11 @@
 package com.example.schoolapp.controller
 
-import com.example.schoolapp.model.Students
 import com.example.schoolapp.model.Subject
 import com.example.schoolapp.service.SubjectService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-
 @RestController
 @RequestMapping("/Subject")   //endpoint
 class SubjectController {
@@ -23,6 +21,7 @@ class SubjectController {
     fun save (@RequestBody subject: Subject):ResponseEntity<Subject>{
         return ResponseEntity(subjectService.save(subject), HttpStatus.OK)
     }
+
     @PutMapping
     fun update (@RequestBody subject: Subject):ResponseEntity<Subject>{
         return ResponseEntity(subjectService.update(subject), HttpStatus.OK)

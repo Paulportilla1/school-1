@@ -16,55 +16,58 @@ class SubjectService {
     @Autowired
     lateinit var studentsRepository: StudentsRepository
 
-    fun list ():List<Subject>{
+    fun list(): List<Subject> {
         return subjectRepository.findAll()
     }
-    fun save(subject: Subject):Subject{
+
+    fun save(subject: Subject): Subject {
         try {
-            studentsRepository.findById(subject.Studentsid)
-                ?: throw Exception("Id del Student no found")
+            subject.nombre?.takeIf { it.trim().isNotEmpty() }
+                ?: throw Exception("Nombres no debe ser vacio")
+            studentsRepository.findById(subject.studentsid)
+                ?: throw Exception("Id del Student no encontrado")
             return subjectRepository.save(subject)
-        }catch (ex : Exception){
+        } catch (ex: Exception) {
             throw ResponseStatusException(
                 HttpStatus.NOT_FOUND, ex.message, ex)
         }
     }
-    fun update(subject: Subject): Subject{
+
+
+    fun update(subject: Subject): Subject {
         try {
             subjectRepository.findById(subject.id)
-                ?: throw Exception("ID no exists")
+                ?: throw Exception("ID no existe")
 
             return subjectRepository.save(subject)
+        } catch (ex: Exception) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, ex.message)
         }
-        catch (ex:Exception){
-            throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
-        }
-
     }
-    fun updateName(subject: Subject): Subject{
-        try{
+
+    fun updateName(subject: Subject): Subject {
+        try {
             val response = subjectRepository.findById(subject.id)
-                ?: throw Exception("ID no exists")
+                ?: throw Exception("ID no existe")
             response.apply {
-                fullname=subject.fullname //un atributo del modelo
+                nombre  = subject.nombre // un atributo del modelo
             }
             return subjectRepository.save(response)
-        }
-        catch (ex:Exception){
-            throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
+        } catch (ex: Exception) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, ex.message)
         }
     }
-    fun delete (id: Long?):Boolean?{
-        try{
+    fun delete(id: Long?): Boolean {
+        try {
             val response = subjectRepository.findById(id)
                 ?: throw Exception("ID no existe")
             subjectRepository.deleteById(id!!)
             return true
-        }
-        catch (ex:Exception){
-            throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
+        } catch (ex: Exception) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, ex.message)
         }
     }
+
     fun listById (id:Long?):Subject?{
         return subjectRepository.findById(id)
     }

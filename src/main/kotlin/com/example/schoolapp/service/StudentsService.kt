@@ -17,12 +17,13 @@ class StudentsService {
     }
     fun save(students: Students): Students{
         try{
+            students.fullname?.takeIf { it.trim().isNotEmpty() }
+                ?: throw Exception("Nombres no debe ser vacio")
             return studentsRepository.save(students)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
-
     }
     fun update(students: Students): Students{
         try {

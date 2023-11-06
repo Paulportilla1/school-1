@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.util.*
 
 
 @Entity
@@ -15,10 +16,10 @@ class Subject {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    var fullname: String? = null
-    var date1: String? = null
+    var nombre: String? = null
+    var fecha: Date? = null
 
     @Column(name = "Students_id")
-    var StudentsID: Long? = null
+    var studentsid: Long? = null
 }
 

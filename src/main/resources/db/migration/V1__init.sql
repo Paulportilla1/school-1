@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS Students (
 
 CREATE TABLE IF NOT EXISTS Subject (
     id SERIAL,
-    fullname VARCHAR(100) NOT NULL,
-    date1 VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    fecha date NOT NULL,
     Students_id INT NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (Students_id ) REFERENCES Students(id)
+    FOREIGN KEY (Students_id) REFERENCES students(id)
     );
